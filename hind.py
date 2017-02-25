@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    hind.py                                            :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: myoung <myoung@student.42.us.org>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/02/24 23:09:24 by myoung            #+#    #+#              #
+#    Updated: 2017/02/24 23:09:30 by myoung           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 import os, sys, requests
 import simplejson as json
 
@@ -15,7 +27,7 @@ if len(sys.argv) > 1:
 	if len(sys.argv) > 2 and sys.argv[2] == "debug":
 		debug = True;
 else:
-	print "Usage: python hind.c <login names file>"
+	print "Usage: python hind.c <login names file> [debug]"
 	sys.exit()
 
 args = [
