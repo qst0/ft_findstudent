@@ -28,9 +28,12 @@ status = requests.post("https://api.intra.42.fr/oauth/token?%s" % ("&".join(args
 response = status.json()
 
 if status.status_code == 200:
-	print "Connected to the 42 API"
+	print "***********************"
+	print term_colors.BLUE + "Connected to the 42 API" + term_colors.END;
+	print "***********************"
 else:
 	print "You are not connecting to the 42 API please check README.md"
+	sys.exit()
 
 if debug:
 	print "Token: " + response['access_token']
@@ -41,15 +44,16 @@ args = [
 'filter[active]=true'
 	]
 
-for name in names:	
-	status = requests.get("https://api.intra.42.fr/v2/users/" + name.strip() + "/locations?%s" % ("&".join(args)))
-	response = status.json()
-	if len(response) > 0:
-		if debug:
-			print str(json.dumps(response, indent=4, sort_keys=True))
-		print name.strip() + " is at computer " + term_colors.GREEN + response[0]['host'] + term_colors.END
-	else:
-		if status.status_code == 200:
-			print name.strip() + " is not showing up on a computer," + term_colors.BLUE + " ask around!" + term_colors.END
+for name in names:
+	if name.strip() != "":
+		status = requests.get("https://api.intra.42.fr/v2/users/" + name.strip() + "/locations?%s" % ("&".join(args)))
+		response = status.json()
+		if len(response) > 0:
+			if debug:
+				print str(json.dumps(response, indent=4, sort_keys=True))
+			print name.strip() + " is at computer " + term_colors.GREEN + response[0]['host'] + term_colors.END
 		else:
-			print term_colors.RED + name.strip() + term_colors.END + " is not a student login on the 42 API"
+			if status.status_code == 200:
+				print name.strip() + " is not showing up on a computer," + term_colors.BLUE + " ask around!" + term_colors.END
+			else:
+				print term_colors.RED + name.strip() + term_colors.END + " is not a student login on the 42 API"
