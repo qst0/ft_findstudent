@@ -1,8 +1,11 @@
-import os
-import sys
-import requests
-
+import os, sys, requests
 import simplejson as json
+
+class term_colors:
+	BLUE = '\033[94m'
+	RED = '\033[91m'
+	GREEN = '\x1b[6;30;42m'
+	END = '\x1b[0m'
 
 debug = False;
 
@@ -44,9 +47,9 @@ for name in names:
 	if len(response) > 0:
 		if debug:
 			print str(json.dumps(response, indent=4, sort_keys=True))
-		print name.strip() + " is at computer " + response[0]['host']
+		print name.strip() + " is at computer " + term_colors.GREEN + response[0]['host'] + term_colors.END
 	else:
 		if status.status_code == 200:
-			print name.strip() + " is not showing up on a computer, ask around!"
+			print name.strip() + " is not showing up on a computer," + term_colors.BLUE + " ask around!" + term_colors.END
 		else:
-			print name.strip() + " is not a student login on the 42 API"
+			print term_colors.RED + name.strip() + term_colors.END + " is not a student login on the 42 API"
