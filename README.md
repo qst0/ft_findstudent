@@ -4,6 +4,24 @@ Use the 42 API to find other students in the zones
 
 ---
 
+Before doing this in python, it's best to look at a curl
+`curl -X POST --data "grant_type=client_credentials&client_id=HERE_GOES_YOUR_UID&client_secret=HERE_GOES_YOUR_SECRET" https://api.intra.42.fr/oauth/token
+
+Which will give you back a token!
+
+Let's try something they show us on the 42 API documentation
+
+```curl -H "Authorization: Bearer HERE_GOES_YOUR_TOKEN" https://api.intra.42.fr/oauth/token/info```
+
+This will give you info back about the token
+
+Just like the curl below
+```
+curl https://api/intra.42.fr/oauth/token/info?&access_token=HERE_GOES_YOUR_TOKEN&token_type=bearer
+```
+
+---
+
 To use this python program you will need to run the following
 
 ```bash
